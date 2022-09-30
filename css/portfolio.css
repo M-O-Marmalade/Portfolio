@@ -237,7 +237,7 @@ p > a:hover {
     margin: .25em;
 }
 
-#aqu-surf > .projectFront {
+#portfolio > .projectFront {
     min-width: fit-content;
     width: min(74vw, 800px);
     height: min(64vh, 500px);
@@ -247,11 +247,11 @@ p > a:hover {
     justify-content: end;
 }
 
-#aqu-surf > .projectFront > div {
+#portfolio > .projectFront > div {
     align-self: center;
 }
 
-#aqu-surf > .projectFront > div p:first-child {
+#portfolio > .projectFront > div p:first-child {
     padding: 0.2em 0.75em 0.14em 0.75em;
     
     border-top-left-radius: 2em;
