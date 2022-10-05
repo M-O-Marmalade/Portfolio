@@ -211,7 +211,7 @@ scene.add(torusMesh);
 //add blender scene
 let blenderScene;
 gltfLoader.load("graphics/models/james-graham.glb", function (gltf) {
-    gltf.scene.position.z = -1.25;
+    // gltf.scene.position.z = -1.25;
     if (wAspectFloat < 1) {
         gltf.scene.scale.set(wAspectFloat, wAspectFloat, wAspectFloat);
         // nameMesh.position.y = .5 * (1 - wAspectFloat);
