@@ -29,7 +29,7 @@
 
         <div id="projectCardInstructions" class="outlinedSection">
             <h1 style="margin-top: 0;">My Projects</h1>
-            <p>Click on a project!</p>
+            <p id="projectCardInstructionsP">Click on a project!</p>
         </div>
 
         <section id="projects">
@@ -649,10 +649,6 @@
                 <p>C++</p>
             </div>
             <div>
-                <img src="/graphics/skills/C-Sharp.svg" alt="">
-                <p>C#</p>
-            </div>
-            <div>
                 <img src="/graphics/skills/JavaScript.svg" alt="">
                 <p>JavaScript</p>
             </div>
@@ -663,6 +659,10 @@
             <div>
                 <img src="/graphics/skills/HTML5.svg" alt="">
                 <p>HTML5</p>
+            </div>
+            <div>
+                <img src="/graphics/skills/C-Sharp.svg" alt="">
+                <p>C#</p>
             </div>
             <div>
                 <img src="/graphics/skills/Lua.svg" alt="">
@@ -843,7 +843,7 @@
             // when a touch screen is detected, we will unhide the button
             document.body.addEventListener('touchmove', function(){
                 document.getElementById("toggleScroll").style.visibility = 'visible';
-                document.getElementById("projectCardInstructions").firstElementChild.innerHTML = 'Tap on a project!';
+                document.getElementById("projectCardInstructionsP").innerHTML = 'Tap on a project!';
             });
         </script>
     </body>
