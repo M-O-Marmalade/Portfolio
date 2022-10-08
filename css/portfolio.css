@@ -69,6 +69,7 @@ html {
     background-attachment: fixed;
     background-size: cover;
     background-image: url("/graphics/BG/BlueGradient.png");
+    scroll-behavior: smooth;
 }
 
 body {
@@ -138,8 +139,55 @@ p > a:hover {
     color: var(--coral-1);
 }
 
+#firstPage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#firstPage h1 {
+    font-size: clamp(7vh, 14vw, 21vh);
+}
+
+#firstPage h2 {
+    font-size: clamp(32px, 7vw, 11vh);
+    text-align: center;
+}
+
+#scrollArrowContainer {
+    margin-top: auto;
+    justify-self: flex-end;
+    height: 120px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+#scrollArrow {
+    border-radius: 100px;
+    /* border: 5px solid var(--coral-3); */
+    justify-self: flex-end;
+    width: 100px;
+    margin: 0;
+    animation-name: arrow;
+    animation-duration: 1.0s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes arrow {
+    0% {
+        margin-bottom: 0px;
+    }
+    50% {
+        margin-bottom: 50px;
+    }
+    100% {
+        margin-bottom: 0px;
+    }
+  }
+
 #projectCardInstructions {
-    margin: 95vh auto 0;
+    margin: 0 auto;
 
     padding: 1rem;
     width: fit-content;
@@ -506,7 +554,7 @@ p > a:hover {
     image-rendering: auto;
 }
 
-#skillsSection {
+#skills {
     margin: 1rem auto;
     max-width: clamp(1px, 90vw, 1500px);
     box-sizing: border-box;
@@ -522,7 +570,13 @@ p > a:hover {
     border-radius: clamp(16px, 5rem, 64px);
 }
 
-#skillsSection div {
+#skills h2 {
+    width: 100%;
+    text-align: center;
+    margin: 1rem;
+}
+
+#skills div {
     min-width: clamp(64px, 5vw, 128px);
     min-height: clamp(64px, 5vw, 128px);
     
@@ -536,7 +590,7 @@ p > a:hover {
     border-radius: 16px;
 }
 
-#skillsSection img {
+#skills img {
     margin: 0.25rem auto;
     width: clamp(48px, 5vw, 56px);
 

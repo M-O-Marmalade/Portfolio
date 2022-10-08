@@ -5,12 +5,30 @@
         <meta name="description" content="James Graham's Portfolio">
         <title>James Graham</title>
         <link rel="stylesheet" href="css/portfolio.css">
-        <link rel="icon" type="image/x-icon" href="graphics/favicon-200.png">
+        <link rel="icon" type="image/x-icon" href="graphics/favicon.svg">
         <base target="_blank">
     </head>
     <body>
 
+        <div id="firstPage">
+
+            <h1>James Graham</h1>
+            <h2>Software Engineer</h2>
+
+            <div id="scrollArrowContainer">
+                <a href="#scrollArrowContainer" target="_self">
+                    <svg id="scrollArrow" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="2" stroke="#ffe4ff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M6 10l6 6l6 -6h-12"></path>
+                     </svg>
+                </a>
+            </div>
+
+        </div>
+
+
         <div id="projectCardInstructions" class="outlinedSection">
+            <h1 style="margin-top: 0;">My Projects</h1>
             <p>Click on a project!</p>
         </div>
 
@@ -611,20 +629,21 @@
             <img src="/graphics/me.jfif" alt="Picture of me!">
 			<h2 style="margin-top: 1rem">James Graham</h2>
             <p>
-				I've been developing software for about 4 years, with a focus on interactive graphics & audio.
-                I love designing and developing user-facing features, but I also tend to be curious about low-level implementation & optimization details, and love to make things run as fast and smooth as possible.
+				I've been programming for about 4 years, with a focus on interactive graphics & audio.
             </p>
             <p>
-                If you want to talk, contact me on <a href="https://www.linkedin.com/in/james-graham-surf">LinkedIn</a>, <a href="https://angel.co/u/james-graham-surf">AngelList</a>, or by <a href="mailto:inquiries@jamesgraham.dev">email</a>!
+                I love designing and developing features that will "wow" an intended audience.
+                I'm also constantly curious about low-level details, and love diving deep to make things run as fast and smooth as possible.
+            </p>
+            <p>
+                I'm currently open to work, so if you want to talk, contact me on <a href="https://www.linkedin.com/in/james-graham-surf">LinkedIn</a>, <a href="https://angel.co/u/james-graham-surf">AngelList</a>, or by <a href="mailto:inquiries@jamesgraham.dev">email</a>!
             </p>
         </section>
 
         <h1>Skills</h1>
-        <section id="skillsSection" class="outlinedSection">
-            <div>
-                <img src="/graphics/skills/C.svg" alt="">
-                <p>C</p>
-            </div>
+        <section id="skills" class="outlinedSection">
+
+            <h2>Languages</h2>
             <div>
                 <img src="/graphics/skills/C++.svg" alt="">
                 <p>C++</p>
@@ -634,21 +653,23 @@
                 <p>C#</p>
             </div>
             <div>
-                <img src="/graphics/skills/Lua.svg" alt="">
-                <p>Lua</p>
-            </div>
-            <div>
-                <img src="/graphics/skills/HTML5.svg" alt="">
-                <p>HTML5</p>
+                <img src="/graphics/skills/JavaScript.svg" alt="">
+                <p>JavaScript</p>
             </div>
             <div>
                 <img src="/graphics/skills/CSS3.svg" alt="">
                 <p>CSS3</p>
             </div>
             <div>
-                <img src="/graphics/skills/JavaScript.svg" alt="">
-                <p>JavaScript</p>
+                <img src="/graphics/skills/HTML5.svg" alt="">
+                <p>HTML5</p>
             </div>
+            <div>
+                <img src="/graphics/skills/Lua.svg" alt="">
+                <p>Lua</p>
+            </div>
+            
+            <h2>Frameworks</h2>
             <div>
                 <img src="/graphics/skills/Three-js.svg" alt="">
                 <p>Three.js</p>
@@ -657,18 +678,16 @@
                 <img src="/graphics/skills/FMOD-White.png" alt="">
                 <p>FMOD</p>
             </div>
-			<div>
-                <img src="/graphics/skills/Unreal.svg" alt="">
-                <p>Unreal</p>
+            <div>
+                <img src="/graphics/skills/Unity.svg" alt="">
+                <p>Unity</p>
             </div>
             <div>
                 <img src="/graphics/skills/Godot.svg" alt="">
                 <p>Godot</p>
             </div>
-            <div>
-                <img src="/graphics/skills/Unity.svg" alt="">
-                <p>Unity</p>
-            </div>
+            
+            <h2>Tools</h2>
             <div>
                 <img src="/graphics/skills/Git.svg" alt="">
                 <p>Git</p>
@@ -693,6 +712,8 @@
                 <img src="/graphics/skills/Neovim.svg" alt="">
                 <p>Neovim</p>
             </div>
+            
+            <h2>Other</h2>
             <div>
                 <img src="/graphics/skills/ZBrush.svg" alt="">
                 <p>ZBrush</p>
@@ -731,7 +752,7 @@
             </div>
             <div>
                 <img src="/graphics/skills/GBZ80.png" alt="">
-                <p>GBZ80</p>
+                <p>GBZ80 ASM</p>
             </div>
             <div>
                 <img src="/graphics/skills/Arduino.svg" alt="">
