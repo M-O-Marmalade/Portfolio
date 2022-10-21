@@ -169,6 +169,7 @@ p > a:hover {
     justify-self: flex-end;
     width: 100px;
     margin: 0;
+    padding: 0 0 5vh;
     animation-name: arrow;
     animation-duration: 1.0s;
     animation-iteration-count: infinite;
