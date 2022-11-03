@@ -146,11 +146,14 @@ p > a:hover {
 }
 
 #firstPage h1 {
+    margin-top: 20vh;
+    color: var(--orange-2);
     font-size: clamp(7vh, 14vw, 21vh);
 }
 
 #firstPage h2 {
-    font-size: clamp(32px, 7vw, 11vh);
+    color: var(--orange-3);
+    font-size: clamp(32px, 7vw, 8vh);
     text-align: center;
 }
 
@@ -553,6 +556,10 @@ p > a:hover {
 
     border-radius: 32px;
     image-rendering: auto;
+}
+
+#meSection p {
+    width: clamp(50%, 100%, 1200px);
 }
 
 #skills {
