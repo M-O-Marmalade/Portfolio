@@ -13,7 +13,7 @@
         <div id="firstPage">
 
             <h1>James Graham</h1>
-            <h2>Interactive Graphics & Audio Specialist</h2>
+            <h2>Software / Games / Web</h2>
 
             <div id="scrollArrowContainer">
                 <a href="#scrollArrowContainer" target="_self">
@@ -377,12 +377,12 @@
                                 <section class="text">
                                     <h1>The Concept</h1>
                                     <p>
-                                        After the initial release of <a onclick="switchCard(this, 'reform', 'paddles')">Paddles</a>, I got another idea for a Renoise tool; a tool that makes it quick and easy to powerfully fine–tune strums.
+                                        After the launch of <a onclick="switchCard(this, 'reform', 'paddles')">Paddles</a>, the need for a new Renoise tool became apparent; one that would make it quick and intuitive to powerfully fine–tune strums.
                                         The idea was inspired by FL Studio's <a href="https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/pianoroll_strum.htm">&quot;Strumizer&quot; tool</a>. 
-                                        It offers knobs and sliders to quickly and easily edit timings and velocities.
-                                        You see the changes happen to the notes in realtime. 
-                                        Pressing the spacebar allows you to quickly hear the strum. 
-                                        This allows you to create and fine–tune strums very quickly.
+                                        It offers knobs and sliders to edit timings and velocities.
+                                        You get realtime visual feedback of your changes to the notes.
+                                        You can preview the audio by pressing the spacebar. 
+                                        Renoise, in comparison, lacks any such abilities, requiring users to edit notes one–by–one instead.
                                     </p>
                                 </section>
                                 <div class="image">
@@ -397,7 +397,7 @@
                                         Being a <a href="https://en.wikipedia.org/wiki/Music_tracker">tracker</a>, Renoise represents musical notes as text on a spreadsheet. 
                                         By default, each cell on the spreadsheet corresponds to a 16th note. 
                                         To have notes trigger in–between this 16th–note grid, you must type a hexadecimal value 0x00–0x80 into the "delay" column next to the note. 
-                                        This results in an inefficient process for creating strums that are not in sync with the grid's time division, requiring the user to manually type individual hexadecimal values for each note over and over again.
+                                        This results in an inefficient process for creating strums that are not in sync with the grid's time division, requiring the user to manually type individual hexadecimal values for each note.
                                     </p>
                                 </section>
                                 <div class="image">
@@ -407,34 +407,29 @@
                             </section>
                             <section>
                                 <section class="text">
-                                    <h2>My Solution</h2>
+                                    <h2>The Solution</h2>
                                     <p>
-                                        I decided to create a tool for Renoise that resembled FL Studio's Strumizer.
-                                        Some priorites of the project included... a playful UI, intuitive controls, notes updating in realtime, easy preview playback, strumming across pattern boundaries, and more. 
-                                        This all added up to be quite a big project for a tracker–based environment.
+                                        A strum–editing tool for Renoise that would include: a playful UI, intuitive controls, realtime updates to notes, easy preview playback, strumming across pattern boundaries, and more. 
+                                        This would be quite a complex task to achieve in a tracker–based application.
                                     </p>
                                 </section>
-                                <div class="image">
+                                <!-- <div class="image">
                                     <img src="/graphics/reform/WarioWareDIY-Music.png" alt="WarioWare D.I.Y. Music Studio">
                                     <p>WarioWare D.I.Y. inspired Reform's UI</p>
-                                </div>
+                                </div> -->
                             </section>
                             <h1>The Development</h1>
                             <p>
-                                It would take much too long to discuss every stage of Reform's development (be my guest to have a look at the <a href="https://github.com/M-O-Marmalade/Reform/blob/master/main.lua">source code</a> though if you&#39;d like), but I will cover some of the noteworthy stages of development.
-                                Just because something isn't discussed here doesn't mean it wasn't a significant stage of development, either.
+                                Though it would take much too long to discuss every challenge and triumph of Reform's development here, we will discuss a few of the noteworthy ones.
                             </p>
                             <section>
                                 <section class="text">
                                     <h2>Caching</h2>
                                     <p>
-                                        To allow manipulated notes to overflow into other patterns, avoid colliding with other notes, and wrap from the end of the song to the beginning, I needed to know pattern lengths, song lengths, and more. 
-                                        When you're dealing with a large amount of notes spanning across multiple patterns, getting all of that data from Renoise's API becomes very slow.
-                                        My solution was to cache the data Lua–side after retrieving it from Renoise.
-                                        Each time I accessed data, I would first check to see if I had it cached, and if that cached data was valid.
-                                        If the "valid" flag was false, I would get the data from the Renoise API.
-                                        I would set the cached data's "valid" flag to false when changes were detected using the <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer–style</a> notifiers that Renoise provides. 
-                                        This resulted in a dramatic increase in performance, while still ensuring that calculations are done with accurate data, that is only retrieved when needed.
+                                        To allow manipulated notes to overflow into other patterns, avoid colliding with other notes, and wrap from the end of the song to the beginning, it was necessary to know pattern lengths, song lengths, note positions, and more. 
+                                        The handing-over of all that data from Renoise's C++ runtime to its Lua API is slow, and Reform demands huge amounts of that data rapidly, hundreds of times per second.
+                                        To improve performance, the data would be cached Lua–side after retrieving it from the Renoise runtime, and Renoise's <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer–style</a> notifiers would be used to alert Reform when cached data was no longer valid.
+                                        This resulted in a dramatic increase in performance (over <b>100x</b>), and was architected in an easy-to-use, modular API.
                                     </p>
                                 </section>
                                 <div class="image">
@@ -446,25 +441,24 @@
                                 <section class="text">
                                     <h2>Curving</h2>
                                     <p>
-                                        Through the development of my <a onclick="switchCard(this, 'reform', 'curves')">Curves</a> tool, I studied <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">Beziér curves</a>, and implemented them in Reform to allow selections of notes to have their timings redistributed according to a curve. 
-                                        Note timings are treated as if they are distributed linearly upon selection, and can then be redistributed along a Quadratic Beziér curve, or an S-shaped Cubic curve. 
-                                        I could easily add more curves, and even allow users to create custom curves, but for the majority of use–cases, these two curve types are robust.
+                                        The implementation of <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">Beziér curves</a> in Reform (developed via the <a onclick="switchCard(this, 'reform', 'curves')">Curves</a> demo) allowed for selections of notes to have their timings "bent". 
+                                        Note timings are interpreted as being linearly distributed upon selection, and can then be redistributed along a Quadratic Beziér curve, or an S-shaped Cubic curve. 
+                                        More curve shapes could easily be added, and users could even be allowed to create custom curves via an editor, but for the majority of use–cases, these two curve types are robust.
             
                                     </p>
                                 </section>
                                 <div class="image">
                                     <img src="/graphics/reform/reform-demo-curve2.apng" alt="Reform's Curve Function Demo">
-                                    <p>Reform's Curve Function</p>
+                                    <p>Reform's Curve function in-action</p>
                                 </div>
                             </section>
                             <section>
                                 <section class="text">
                                     <h1>The Result</h1>
                                     <p>
-                                        This is my most organized, in–depth project to date, requiring a lot of learning, problem–solving, and optimizations to get the accurate, performant result that was achieved. 
-                                        I have some features I plan to add later on, such as undo/redo support, note–length preservation, quantize/humanize control, granular anchor placement, and a custom curve editor (based on my <a onclick="switchCard(this, 'reform', 'curves')">Curves</a> editor). 
-                                        Despite this to–do list, I consider this project to be very full–featured and polished to a highly professional degree.
-                                        I decided to provide the tool for free, out of love for Renoise and the many good times I've had with it.
+                                        The tool is accurate, performant, and fully–featured to a professional standard.
+                                        This was achieved through long–term project organization, disciplined learning, patient problem–solving, and clever optimization. 
+                                        The tool has been provided for free, out of deep appreciation for the Renoise software.
                                     </p>
                                 </section>
                                 <div class="image">
@@ -628,16 +622,13 @@
             <img src="/graphics/me.jfif" alt="Picture of me!">
 			<h2 style="margin-top: 1rem">James Graham</h2>
             <p>
-                Hello!
+				I'm a software/game/web developer, passionate about combining beautiful design, engaging interactivity, and performant architecture.
             </p>
             <p>
-				I'm a software/web developer, specializing in interactive graphics & audio.
+                I love designing and developing high-level features for users to interact with, but I also love going behind-the-scenes to optimize low-level code, allowing for a high-standard user experience.
             </p>
             <p>
-                I love designing and developing high-level features, but I also love developing clever solutions in low-level code to make things run fast and smooth.
-            </p>
-            <p>
-                I'm currently open to work! Talk with me on <a href="https://www.linkedin.com/in/james-graham-surf">LinkedIn</a>, <a href="https://angel.co/u/james-graham-surf">AngelList</a>, or by <a href="mailto:inquiries@jamesgraham.dev">email</a>!
+                Contact me on <a href="https://www.linkedin.com/in/james-graham-surf">LinkedIn</a>, or by <a href="mailto:inquiries@jamesgraham.dev">email</a>!
             </p>
         </section>
 
@@ -780,9 +771,9 @@
                     <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
                 </svg>
             </a>
-            <a href="https://angel.co/u/james-graham-surf">
+            <!-- <a href="https://angel.co/u/james-graham-surf">
                 <img src="/graphics/AngelList-thick.svg" alt="AngelList" style="height: 52px; margin: 0.5rem;">
-            </a>
+            </a> -->
             <a href="mailto:inquiries@jamesgraham.dev">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="64" height="64" viewBox="0 0 24 24" stroke-width="2" stroke="#ffe4ff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
