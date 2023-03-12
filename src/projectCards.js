@@ -62,8 +62,8 @@ function closeFlipCard(card) {
     if (!isACardFlipped) {return;}
     isACardFlipped = false;
     
-    console.log(card.id + "'s close button clicked!");
-    console.log(card.style.position);
+    // console.log(card.id + "'s close button clicked!");
+    // console.log(card.style.position);
 
     const origCard = document.getElementById(card.id.slice( 0, -5 ));
     const container = origCard.parentElement;

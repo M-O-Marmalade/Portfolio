@@ -289,21 +289,20 @@ p > a:hover {
     margin: .25em;
 }
 
-#portfolio > .projectFront {
+:is(#portfolio, #portfolioclone) > .projectFront {
     min-width: fit-content;
-    width: min(74vw, 800px);
-    height: min(64vh, 500px);
 
     display: flex;
     flex-direction: column;
     justify-content: end;
 }
 
-#portfolio > .projectFront > div {
+:is(#portfolio, #portfolioclone) > .projectFront > div {
+    margin-top: min(300px, 33vh);
     align-self: center;
 }
 
-#portfolio > .projectFront > div p:first-child {
+:is(#portfolio, #portfolioclone) > .projectFront > div p:first-child {
     padding: 0.2em 0.75em 0.14em 0.75em;
     
     border-top-left-radius: 2em;
