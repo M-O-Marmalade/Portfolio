@@ -1,4 +1,5 @@
 const scrollButton = document.getElementById("toggleScroll");
+scrollButton.onclick = toggleScrolling;
 const buttonWidth = scrollButton.style.width;
 let scrollingEnabled = true;
 function toggleScrolling(){

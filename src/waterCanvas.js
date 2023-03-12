@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MyEnvironment } from 'three/examples/jsm/environments/MyEnvironment.js';
 
 const xAxis = new THREE.Vector3(1, 0, 0);
 const yAxis = new THREE.Vector3(0, 1, 0);
@@ -105,10 +106,11 @@ const gltfLoader = new GLTFLoader();
 const renderer = new THREE.WebGLRenderer({
     canvas: waterCanvas,
     powerPreference: "high-performance",
+    // premultipliedAlpha: false,
     // precision: 'lowp',
     // depth: false,
     // stencil: false
-    // antialias: true
+    antialias: true
 });
 renderer.setPixelRatio(pixelDensity);
 renderer.setSize(wX, wY);
@@ -116,10 +118,10 @@ renderer.setSize(wX, wY);
 
 //scene & camera
 const scene = new THREE.Scene();
-const bgTex = textureLoader.load('graphics/textures/scene-background.png');
-// scene.background = new THREE.Color(0x0080ff);
-scene.background = bgTex;
-scene.environment = bgTex;
+// const bgTex = textureLoader.load('graphics/textures/scene-background-1024.png');
+// scene.background = bgTex;
+scene.background = new THREE.Color(0x0080ff);
+
 // const camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0.1, 1000);
 const camera = new THREE.PerspectiveCamera(26.5, wAspectFloat, 0.5, 1000);
 camera.position.x = 0;
@@ -129,7 +131,7 @@ camera.lookAt(0, 0, 0);
 
 
 // light
-const light = new THREE.DirectionalLight(0xf8f8f8, 1.5);
+const light = new THREE.DirectionalLight(0xffffff, 1.5);
 light.position.set(-2, 2, 10);
 scene.add(light);
 
@@ -137,11 +139,31 @@ scene.add(light);
 const matRefractive = new THREE.MeshPhysicalMaterial({
     side: THREE.FrontSide,
     transmission: 1.0,
-    roughness: 0,
+    roughness: 0.07,
     ior: 1.333,
     thickness: 1,
     specularIntensity: 0.1,
     // reflectivity: 1,
+});
+
+let matWater = new THREE.MeshPhysicalMaterial({
+    side: THREE.FrontSide,
+    color: 0xffffff,
+    transmission: 1.0,
+    opacity: 0.0,
+    
+    metalness: 0.0,
+    roughness: 0.0,
+    
+    ior: 1.333,
+    reflectivity: 0.08,
+    thickness: 5.0, // defines how "deep" the body of water is, in units (could be meters, could be inches, etc)
+    //thicknessMap: , // texture that defines how "deep" the body of water is across the surface
+
+    specularIntensity: 1.0,
+    specularColor: 0xffffff,
+
+    envMapIntensity: 1.0,
 });
 
 const matNormalFlat = new THREE.MeshNormalMaterial({
@@ -179,18 +201,18 @@ let waterMesh;
 const waterScale = 1;
 
 createWater();
-waterMesh = new THREE.Mesh(waterGeometry, matRefractive);
+waterMesh = new THREE.Mesh(waterGeometry, matWater);
 scene.add(waterMesh);
 
 
 //add torus to scene
 const torusGeometry = new THREE.TorusKnotGeometry(10, 2.3, 256, 64);
 const torusMesh = new THREE.Mesh(torusGeometry, matNormalSmooth);
-torusMesh.position.z = -1;
-torusMesh.position.y = -5.5;
-torusMesh.scale.x = 0.034;
-torusMesh.scale.y = 0.034;
-torusMesh.scale.z = 0.034;
+torusMesh.position.z = 0;
+torusMesh.position.y = -4.9;
+torusMesh.scale.x = 0.025;
+torusMesh.scale.y = 0.025;
+torusMesh.scale.z = 0.025;
 scene.add(torusMesh);
 
 
@@ -237,12 +259,17 @@ document.body.addEventListener('mouseup', onMouseUp);
 window.addEventListener("resize", onWindowResize);
 document.addEventListener("visibilitychange", onVisibilityChange);
 
+
+// generate the water's environment map after the first frame has rendered
+const pmremGen = new THREE.PMREMGenerator(renderer);
+scene.environment = pmremGen.fromScene( scene ).texture;
+
+
 //start the animation
 let prevRippleTime = performance.now();
 let extraRippleTime = 0.0;
 let lastRenderTime = performance.now();
 animate();
-
 
 function createWater(){
     calculateWaterSettings();
