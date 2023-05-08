@@ -35,10 +35,12 @@
 @font-face {
     font-family: interceptor;
     src: url("/fonts/interceptor.otf");
+    font-display: swap;
 }
 @font-face {
     font-family: monof55;
     src: url("/fonts/monof55.ttf");
+    font-display: swap;
 }
 
 ::-webkit-scrollbar {
@@ -329,6 +331,7 @@ p > a:hover {
     height: 20px;
 
     content:url("/graphics/projectXButton.svg");
+    alt: "Close project card";
     filter: invert(63%) sepia(30%) saturate(3651%) hue-rotate(316deg) brightness(102%) contrast(105%);
     cursor: pointer;
 }
