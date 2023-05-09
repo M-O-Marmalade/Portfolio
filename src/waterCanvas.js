@@ -231,7 +231,6 @@ scene.add(torusMesh);
 
 
 //add blender scene
-let blenderScene;
 gltfLoader.load("graphics/models/james-graham.glb", function (gltf) {
     // gltf.scene.position.z = -1.25;
     if (wAspectFloat < 1) {
@@ -248,7 +247,15 @@ gltfLoader.load("graphics/models/james-graham.glb", function (gltf) {
         o.material = matNormalFlat;
     })
     scene.add(gltf.scene);
-})
+});
+
+// gltfLoader.load("graphics/models/palm-leaf.glb", function (gltf) {
+//     // gltf.scene.position.z = -1.25;
+//     gltf.scene.traverse((o) => {
+//         o.material = matNormalFlat;
+//     });
+//     scene.add(gltf.scene);
+// });
 
 
 //add document event handlers
