@@ -586,11 +586,12 @@ p > a:hover {
     margin: 1rem;
 }
 
-#skills div {
+#skills > .skill {
     min-width: clamp(64px, 5vw, 128px);
     min-height: clamp(64px, 5vw, 128px);
     
     padding: 0.25rem;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -598,13 +599,50 @@ p > a:hover {
     
     border: 1px dashed var(--coral-2);
     border-radius: 16px;
+    background-color: transparent;
+    transition: background-color 500ms;
 }
 
-#skills img {
+#skills > .skill:hover:not(:has(.skillPopupWrapper:hover)) {
+    background-color: var(--coral-3);
+}
+
+.skill img {
     margin: 0.25rem auto;
     width: clamp(48px, 5vw, 56px);
 
     image-rendering: auto;
+}
+
+#skills > .skill > .skillPopupWrapper {
+    position: absolute;
+    overflow: hidden;
+    margin: 0;
+    top: calc(100% + 10px);
+    width: 0px;
+    height: 0px;
+    opacity: 0%;
+    /* transition: opacity 50ms; */
+    z-index: 40;
+}
+
+#skills > .skill:hover:not(:has(.skillPopupWrapper:hover)) > .skillPopupWrapper {
+    width: clamp(150px, 21vw, 350px);
+    height: fit-content;
+    opacity: 81%;
+}
+
+#skills > .skill > .skillPopupWrapper > .skillPopup {
+    margin: 0;
+    background-color: var(--dark-2);
+}
+
+#skills > .skill > .skillPopupWrapper > .skillPopup > p {
+    color: var(--coral-2);
+}
+
+#skills > .skill > .skillPopupWrapper > .skillPopup > .skillExperience {
+    color: var(--blue-3);
 }
 
 #linksSection {
