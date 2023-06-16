@@ -27,6 +27,7 @@
     --fs-xl: 2.5rem;
     --fs-l: 2rem;
     --fs-m: 1.5rem;
+    --fs-m2: 1.25rem;
     --fs-s: 1rem;
     --fs-xs: 0.9rem;
     --fs-xxs: xx-small;
@@ -622,23 +623,26 @@ p > a:hover {
     width: 0px;
     height: 0px;
     opacity: 0%;
-    /* transition: opacity 50ms; */
     z-index: 40;
 }
 
 #skills > .skill:hover:not(:has(.skillPopupWrapper:hover)) > .skillPopupWrapper {
     width: clamp(150px, 21vw, 350px);
     height: fit-content;
-    opacity: 81%;
+    opacity: 88%;
+    overflow: visible;
 }
 
 #skills > .skill > .skillPopupWrapper > .skillPopup {
     margin: 0;
     background-color: var(--dark-2);
+    border-radius: 7px;
 }
 
 #skills > .skill > .skillPopupWrapper > .skillPopup > p {
     color: var(--coral-2);
+    font-size: var(--fs-m2);
+    padding: 0.10em;
 }
 
 #skills > .skill > .skillPopupWrapper > .skillPopup > .skillExperience {
